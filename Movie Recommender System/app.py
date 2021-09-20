@@ -19,13 +19,24 @@ if __name__ == '__main__':
     movie_list=movie_list['title'].values
     selected_movie_name =st.selectbox('Please select movie',movie_list)
     if st.button('Recommend'):
-        names,posters=recommend(selected_movie_name)
-        for i in recommendations:
-            
+        recommended_movie_names,recommended_movie_posters = recommend(selected_movie_name)
+        col1, col2, col3, col4, col5 = st.columns(5)
+        with col1:
+            st.text(recommended_movie_names[0])
+            st.image(recommended_movie_posters[0])
+        with col2:
+            st.text(recommended_movie_names[1])
+            st.image(recommended_movie_posters[1])
 
-
-            
-            st.write(i)
+        with col3:
+            st.text(recommended_movie_names[2])
+            st.image(recommended_movie_posters[2])
+        with col4:
+            st.text(recommended_movie_names[3])
+            st.image(recommended_movie_posters[3])
+        with col5:
+            st.text(recommended_movie_names[4])
+            st.image(recommended_movie_posters[4])
 
 
     print(movie_list)

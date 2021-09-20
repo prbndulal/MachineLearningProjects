@@ -46,6 +46,17 @@ vectors=cv.fit_transform(movies_new_df['tags']).toarray()
 similarity=cosine_similarity(vectors)
 print (similarity)
 
+
+def fetch_poster(movie_id):
+    url=f'https://api.themoviedb.org/3/movie/{movie_id}?api_key=c3dcabd3cf74681c0a995719cb51e4c4&language=en-US'
+    response = requests.get(url)
+    data = response.json()
+    print(data)
+    poster_path = data['poster_path']
+    print(poster_path)
+    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
+    return full_path
+
 def recommend(movie):
     movie_index=movies_new_df[movies_new_df['title']==movie].index[0]
     distances=similarity[movie_index]
@@ -53,7 +64,7 @@ def recommend(movie):
     recommended_movies=[]
     recommended_movies_posters=[]
     for i in movies_list:
-        movie_id=i[0]
+        movie_id=movies_new_df.iloc[i[0]].movie_id
         recommended_movies.append(movies_new_df.iloc[i[0]].title)
         recommended_movies_posters.append(fetch_poster(movie_id))
     return recommended_movies,recommended_movies_posters
@@ -67,14 +78,7 @@ def save_model(model,filename):
     joblib.dump(model,filepath)
     print('Saving model complete')
 
-def fetch_poster(movie_id):
-    url=f'https://api.themoviedb.org/3/movie/{movie_id}?api_key=c3dcabd3cf74681c0a995719cb51e4c4&language=en-US'
-    data = requests.get(url)
-    data = data.json()
-    print(data)
-    poster_path = data['poster_path']
-    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-    return full_path
+
 
 
 print(recommend('Batman Begins'))
