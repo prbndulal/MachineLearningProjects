@@ -2,4 +2,4 @@
 
 ##### Download data from https://www.kaggle.com/tmdb/tmdb-movie-metadata and store inside data folder inside root
 
-#### [Deployed in heroku](http://movierecommenderpd.herokuapp.com/)
+#### Click on  [Heroku Link](http://movierecommenderpd.herokuapp.com/) for demo
