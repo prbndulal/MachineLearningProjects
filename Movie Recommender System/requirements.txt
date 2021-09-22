@@ -1,4 +1,6 @@
 
 
-requests
 streamlit
+requests
+nltk
+sklearn
